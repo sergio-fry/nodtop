@@ -1,5 +1,7 @@
 Nodtop::Application.routes.draw do
   root 'sites#index'
+
+  get "about" => "pages#about"
   resources :referral_codes
   resources :sites, :only => [:index, :create, :new]
 

@@ -1,14 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <title>Nodtop</title>
+  <title>Каталог сайтов НОД</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag "http://yandex.st/bootstrap/3.0.3/css/bootstrap.min.css" %>
 </head>
 <body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="logo"><%= link_to_unless_current "Каталог сайтов НОД", root_path %></div>
+        <hr />
 
-<%= yield %>
+        <%= yield %>
 
+        <hr />
+        <div class="footer">
+
+          2014 &copy; <%= link_to "Катлог сайтов НОД", root_path %>
+
+          <%= link_to "О сайте", url_for(:controller => :pages, :action => :about) %>
+          <%= link_to "Автор", "http://www.sergei-udalov.ru", :target => "_blank" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= javascript_include_tag "http://yandex.st/bootstrap/3.0.3/js/bootstrap.min.js" %>
 </body>
 </html>

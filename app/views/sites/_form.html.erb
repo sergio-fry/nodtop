@@ -1,4 +1,5 @@
-<%= form_for(@site) do |f| %>
+<%= form_for(@site, :html => {}) do |f| %>
+
   <% if @site.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@site.errors.count, "error") %> prohibited this site from being saved:</h2>
@@ -11,20 +12,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :referral, "Пригласительный код" %><br>
-    <%= f.text_field :referral %>
+  <div class="field form-group">
+    <%= f.label :referral, "Пригласительный код *" %><br>
+    <%= f.text_field :referral, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :title, "Название сайта" %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :class => "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :domain, "Домен (без http://)" %><br>
-    <%= f.text_field :domain %>
+  <div class="field form-group">
+    <%= f.label :domain, "Домен (без http://) *" %><br>
+    <%= f.text_field :domain, :class => "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit "Добавить" %>
+    <%= f.submit "Добавить", :class => "btn btn-primary" %>
   </div>
 <% end %>
