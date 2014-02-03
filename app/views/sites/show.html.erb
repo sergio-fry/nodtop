@@ -1,19 +1,28 @@
-<p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @site.title %>
+  <strong>Сайт:</strong>
+  <%= @site.title.presence || @site.domain %>
 </p>
 
 <p>
-  <strong>Domain:</strong>
+  <strong>Домен:</strong>
   <%= @site.domain %>
 </p>
 
 <p>
-  <strong>Rating:</strong>
+  <strong>Рейтинг:</strong>
   <%= @site.rating %>
 </p>
 
-<%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>
+<p>
+  <strong>Код для вставки:</strong><br />
+
+  <textarea cols="80" rows=6 class="hidden site-widget-code" data-domain="<%= @site.domain %>">
+<script>
+  LentaNOD.init({ corner: "top_right" });
+</script>
+  </textarea>
+
+  <br /><small>Примечание: нужно вставить этот код перед закрытием тега body</small>
+  <br /><small>Примечание: этот код подходит только для сайта '<%= @site.domain %>'</small>
+</p>

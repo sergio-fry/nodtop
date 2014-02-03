@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th width="100%">Сайт</th>
+      <th></th>
       <th>Рейтинг</th>
     </tr>
   </thead>
@@ -11,10 +12,11 @@
   <tbody>
   <% @sites.popular.each do |site| %>
     <tr>
-    <td><%= link_to (site.title.presence || site.domain), site.url %></td>
-    <td><%= site.rating %></td>
-  </tr>
-<% end %>
+      <td><%= link_to (site.title.presence || site.domain), site.url %></td>
+      <td><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-cog", :title => "Получить код для вставки"), site %></td>
+      <td><%= site.rating %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 

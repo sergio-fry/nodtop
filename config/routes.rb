@@ -3,7 +3,7 @@ Nodtop::Application.routes.draw do
 
   get "about" => "pages#about"
   resources :referral_codes
-  resources :sites, :only => [:index, :create, :new]
+  resources :sites, :only => [:index, :create, :new, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
