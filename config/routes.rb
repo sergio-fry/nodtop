@@ -1,4 +1,8 @@
 Nodtop::Application.routes.draw do
+  root 'sites#index'
+  resources :referral_codes
+  resources :sites, :only => [:index, :create, :new]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

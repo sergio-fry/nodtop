@@ -1,0 +1,27 @@
+<h1>НОД Топ</h1>
+<p>Рейтинг сайтов, сторонников <a href="http://rusnod.ru">национально-освободительного движения</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Сайт</th>
+      <th>Рейтинг</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sites.popular.each do |site| %>
+      <tr>
+        <td><%= link_to (site.title.presence || site.domain), site.url %></td>
+        <td><%= site.rating %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Добавить свой сайт', new_site_path %>
