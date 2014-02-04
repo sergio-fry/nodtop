@@ -3,6 +3,8 @@ Nodtop::Application.routes.draw do
 
   get "about" => "pages#about"
 
+  resources :sites, :only => [:index, :create, :new, :show]
+
   scope path: "/api/3gf98befdh23fn98qwefg72gn9" do
     resources :referral_codes do
       collection do
@@ -15,10 +17,7 @@ Nodtop::Application.routes.draw do
         post "check_all"
       end
     end
-
   end
-
-  resources :sites, :only => [:index, :create, :new, :show]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
