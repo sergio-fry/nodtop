@@ -10,6 +10,12 @@ Nodtop::Application.routes.draw do
       end
     end
 
+    resources :sites do
+      collection do
+        post "check_all"
+      end
+    end
+
   end
 
   resources :sites, :only => [:index, :create, :new, :show]

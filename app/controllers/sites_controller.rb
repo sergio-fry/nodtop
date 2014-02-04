@@ -1,5 +1,9 @@
+require "net/http"
+require "uri"
+
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, :only => :check_all
 
   # GET /sites
   # GET /sites.json
@@ -63,6 +67,25 @@ class SitesController < ApplicationController
       format.html { redirect_to sites_url }
       format.json { head :no_content }
     end
+  end
+
+  def check_all
+    Site.where("checked_at IS NULL OR checked_at < ?", 1.hour).each do |site|
+      uri = URI.parse("https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/#{site.counter_id}&projection=FULL")
+
+      response = Net::HTTP.get_response(uri)
+
+      Rails.logger.debug(response.body)
+
+      data_hash = JSON.parse(response.body)
+      
+      site.rating = (data_hash["analytics"]["week"]["longUrlClicks"].to_f / 100.0).round(2)
+      site.checked_at = Time.now
+
+      site.save
+    end
+
+    render :text => :OK
   end
 
   private

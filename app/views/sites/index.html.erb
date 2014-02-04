@@ -14,7 +14,7 @@
     <tr>
       <td><%= link_to (site.title.presence || site.domain), site.url %></td>
       <td><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-cog", :title => "Получить код для вставки"), site %></td>
-      <td><%= site.rating %></td>
+      <td><%= '%.2f' % site.rating %></td>
     </tr>
   <% end %>
   </tbody>
