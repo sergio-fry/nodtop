@@ -2,8 +2,18 @@ Nodtop::Application.routes.draw do
   root 'sites#index'
 
   get "about" => "pages#about"
-  resources :referral_codes
+
+  scope path: "/api/3gf98befdh23fn98qwefg72gn9" do
+    resources :referral_codes do
+      collection do
+        post "generate"
+      end
+    end
+
+  end
+
   resources :sites, :only => [:index, :create, :new, :show]
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
