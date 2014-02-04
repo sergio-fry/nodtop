@@ -70,7 +70,7 @@ class SitesController < ApplicationController
   end
 
   def check_all
-    Site.where("checked_at IS NULL OR checked_at < ?", 1.hour).each do |site|
+    Site.where("checked_at IS NULL OR checked_at < ?", 1.hour.ago).each do |site|
       uri = URI.parse("https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/#{site.counter_id}&projection=FULL")
 
       response = Net::HTTP.get_response(uri)
