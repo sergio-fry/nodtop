@@ -1,6 +1,7 @@
 Nodtop::Application.routes.draw do
   root 'sites#index'
 
+  get "counter.js" => "counter#code"
   get "about" => "pages#about"
 
   resources :sites, :only => [:index, :create, :new, :show]

@@ -15,12 +15,12 @@
 </p>
 
 <p>
-  <strong>Код для вставки:</strong><br />
+  <strong>Код для вставки (георгиевская лента + счетчик):</strong><br />
 
-  <textarea cols="80" rows=6 class="hidden site-widget-code" data-domain="<%= @site.domain %>">
-<script>
-  LentaNOD.init({ corner: "top_right" });
-</script>
+  <textarea cols="80" rows=6>
+<!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
+<script src="http://nodtop.russianpulse.ru/counter.js"></script>
+<script>NODTop.init({ counter_id: "<%= @site.counter_id %>" });</script>
   </textarea>
 
   <br /><small>Примечание: нужно вставить этот код перед закрытием тега body</small>
