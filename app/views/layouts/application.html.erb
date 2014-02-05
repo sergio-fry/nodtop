@@ -8,6 +8,21 @@
   <%= csrf_meta_tags %>
 
   <%= stylesheet_link_tag "http://yandex.st/bootstrap/3.0.3/css/bootstrap.min.css" %>
+
+  <!-- sharethis -->
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "129c50e2-8f7a-4ac9-a044-4d034c32a286", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+  <style>
+  // правка стиля, который испортил bootstrap (http://stackoverflow.com/questions/18165901/twitters-bootstrap-3-with-sharethis-widget)
+#sharethis span
+{
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+  </style>
+  <!-- sharethis -->
 </head>
 <body>
   <div class="container">
@@ -25,6 +40,16 @@
 
           <%= link_to "О сайте", url_for(:controller => :pages, :action => :about) %>
           <%= link_to "Автор", "http://www.sergei-udalov.ru", :target => "_blank" %>
+        </div>
+
+        <br />
+        <br />
+        <div style='text-align: center; width: 100%' id="sharethis">
+          <span class='st_vkontakte_hcount' displayText='Vkontakte'></span>
+          <span class='st_odnoklassniki_hcount' displayText='Odnoklassniki'></span>
+          <span class='st_facebook_hcount' displayText='Facebook'></span>
+          <span class='st_twitter_hcount' displayText='Tweet'></span>
+          <span class='st_plusone_hcount' displayText='Google +1'></span>
         </div>
       </div>
     </div>
