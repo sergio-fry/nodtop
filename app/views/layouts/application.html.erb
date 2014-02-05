@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <title>Каталог сайтов НОД</title>
+  <title>Рейтинг сайтов НОД</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -13,16 +13,19 @@
   <script type="text/javascript">var switchTo5x=true;</script>
   <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
   <script type="text/javascript">stLight.options({publisher: "129c50e2-8f7a-4ac9-a044-4d034c32a286", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+  <!-- правка стиля, который испортил bootstrap (http://stackoverflow.com/questions/18165901/twitters-bootstrap-3-with-sharethis-widget) -->
   <style>
-  // правка стиля, который испортил bootstrap (http://stackoverflow.com/questions/18165901/twitters-bootstrap-3-with-sharethis-widget)
-#sharethis span
-{
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-}
+    #sharethis span
+    {
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+    }
   </style>
   <!-- sharethis -->
+
+  <%= render :partial => 'shared/social_share' %>
 </head>
 <body>
   <div class="container">
@@ -36,7 +39,7 @@
         <hr />
         <div class="footer">
 
-          2014 &copy; <%= link_to "Катлог сайтов НОД", root_path %>
+          2014 &copy; <%= link_to "Рейтинг сайтов НОД", root_path %>
 
           <%= link_to "О сайте", url_for(:controller => :pages, :action => :about) %>
           <%= link_to "Автор", "http://www.sergei-udalov.ru", :target => "_blank" %>
