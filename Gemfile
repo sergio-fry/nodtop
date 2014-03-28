@@ -50,3 +50,5 @@ end
 group :development do
   gem 'zeus'
 end
+
+gem 'fog'

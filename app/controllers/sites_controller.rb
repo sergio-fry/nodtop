@@ -3,7 +3,7 @@ require "uri"
 
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
-  skip_before_action :verify_authenticity_token, :only => :check_all
+  skip_before_action :verify_authenticity_token, :only => [:check_all, :update_banners]
 
   # GET /sites
   # GET /sites.json
@@ -86,6 +86,18 @@ class SitesController < ApplicationController
     end
 
     render :text => :OK
+  end
+
+  def update_banners
+    begin
+      Site.all.each do |site|
+        site.update_banners
+      end
+
+      render :text => :OK
+    rescue Exception => $e
+      render :text => "Error: #{$e}"
+    end
   end
 
   private

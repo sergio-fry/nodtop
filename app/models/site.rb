@@ -4,9 +4,9 @@ require "uri"
 class Site < ActiveRecord::Base
   belongs_to :referral_code
 
-  validates :domain, :presence => true, :format => { with: /\A[a-z\-\.0-9]+\z/i }, :uniqueness => true
-  validates :referral_code, :presence => true
-  validates :referral_code_id, :uniqueness => true
+  validates :domain, :presence => { :message => "Домен не может быть пустым" }, :format => { with: /\A[a-z\-\.0-9]+\z/i, :message => "Некорректный формат домена" }, :uniqueness => { :message => "Этот сайт уже есть в рейтинге" }
+  #validates :referral_code, :presence => true
+  #validates :referral_code_id, :uniqueness => true
 
   before_create :set_counter_id
 
@@ -24,6 +24,11 @@ class Site < ActiveRecord::Base
     "http://#{domain}"
   end
 
+  def update_banners
+    bucket = AWS_STORE.directories.get ENV['S3_BUCKET_NAME']
+    bucket.files.create(:key => "banners/#{counter_id}/banner_1.gif", :body => open(File.join(Rails.root, "app/banners/banner_1.gif")), :public => true)
+  end
+
   private
 
   def set_counter_id
@@ -33,7 +38,7 @@ class Site < ActiveRecord::Base
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = Net::HTTP::Post.new(uri.request_uri)
-    request.body = '{"longUrl": "http://rusnod.github.io/lenta/javascripts/lenta.min.js?ref=' + domain + '"}'
+    request.body = '{"longUrl": "http://sergio-fry.github.io/nodtop-counter-site/counter/v1/Ya-lublu-Rossiu.gif?ref=' + domain + '"}'
     request["Content-Type"] = "application/json"
     response = http.request(request)
 

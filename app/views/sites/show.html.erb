@@ -18,11 +18,18 @@
   <strong>Код для вставки (георгиевская лента + счетчик):</strong><br />
 
   <textarea cols="80" rows=6>
-<!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
-<script src="http://nodtop.russianpulse.ru/counter.js"></script>
-<script>NODTop.init({ counter_id: "<%= @site.counter_id %>" });</script>
+    <!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
+    <span id="nodtop_counter_container"></span>
+     <script>
+       window.nodtop_cnt = {
+         id: "<%= @site.counter_id %>",
+         container_id: "nodtop_counter_container",
+         type: 0
+       }
+    </script>
+    <script src="//sergio-fry.github.io/nodtop-counter-site/counter/v1/cnt.js" defer></script>
+
   </textarea>
 
-  <br /><small>Примечание: нужно вставить этот код перед закрытием тега body</small>
   <br /><small>Примечание: этот код подходит только для сайта '<%= @site.domain %>'</small>
 </p>
