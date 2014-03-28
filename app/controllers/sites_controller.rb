@@ -38,6 +38,9 @@ class SitesController < ApplicationController
       if @site.save
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
         format.json { render action: 'show', status: :created, location: @site }
+      elsif Site.exists?(:domain => @site.domain)
+        format.html { redirect_to site_path(Site.find_by(:domain => @site.domain)) }
+        format.json { render json: @site.errors, status: :unprocessable_entity }
       else
         format.html { render action: 'new' }
         format.json { render json: @site.errors, status: :unprocessable_entity }
