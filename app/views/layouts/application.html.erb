@@ -41,6 +41,19 @@
 
           2014 &copy; <%= link_to "Рейтинг сайтов НОД", root_path %>
 
+          <!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
+            <span id="nodtop_counter_container"></span>
+            <script>
+  window.nodtop_cnt = {
+  id: "ikpMjy",
+      container_id: "nodtop_counter_container",
+      type: 1 // 0 - невидимый, 1 - маленький баннер
+  }
+            </script>
+            <script src="//sergio-fry.github.io/nodtop-counter-site/counter/v1/cnt.js" defer="defer"></script>
+
+                
+
           <%= link_to "О сайте", url_for(:controller => :pages, :action => :about) %>
           <%= link_to "Автор", "http://www.sergei-udalov.ru", :target => "_blank" %>
         </div>
@@ -60,11 +73,6 @@
 
   <%= javascript_include_tag "http://yandex.st/bootstrap/3.0.3/js/bootstrap.min.js" %>
   <%= javascript_include_tag "http://yandex.st/underscore/1.5.2/underscore-min.js" %>
-
-  <!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
-  <script src="http://nodtop.russianpulse.ru/counter.js"></script>
-  <script>NODTop.init({ counter_id: "FGjBAO" });</script>
-
 
   <!-- Rating@Mail.ru counter -->
   <script type="text/javascript">//<![CDATA[
