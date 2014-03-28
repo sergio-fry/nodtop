@@ -8,10 +8,16 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require sites
  *= require_self
  */
 
+a { color: orange}
 .logo { padding-top: 30px; font-size: x-large; font-weight: bold }
+.logo img { position: relative; top: -29px; margin-right: 20px }
 .logo a { color: black }
 
 .footer a { padding-right: 20px; }
+
+body { background: #aaa url('<%= asset_path("bg-2.jpg") %>') }
+.site-body { background: white; margin-top: 20px; padding: 40px; border: 5px solid grey; }

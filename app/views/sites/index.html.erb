@@ -1,8 +1,7 @@
-<p>В рейтинге могут принять участие только сайты-сторонники <a href="http://rusnod.ru" target="_blank">НОД</a>.</p>
-
 <table class="table table-striped table-hover sites-table">
   <thead>
     <tr>
+      <th></th>
       <th width="100%">Сайт</th>
       <th></th>
       <th>Рейтинг</th>
@@ -11,10 +10,17 @@
   </thead>
 
   <tbody>
-  <% @sites.popular.each do |site| %>
+  <% @sites.popular.each_with_index do |site, index| %>
     <tr class="site" data-rating="<%= site.rating %>">
-      <td><%= link_to (site.title.presence || site.domain), site.url %></td>
-      <td><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-cog", :title => "Получить код для вставки"), site %></td>
+      <td class="rank"><%= index + 1 %></td>
+      <td class="title">
+
+        <span class="favicon">
+          <img alt="" height="16" onError="this.onerror=null;$(this).replaceWith(&quot;&lt;span class=&#39;glyphicon glyphicon-new-window&#39;&gt;&lt;/span&gt;&quot;);" src="//<%= site.domain %>/favicon.ico" width="16" />
+        </span>
+        <%= link_to (site.title.presence || site.domain), site.url %>
+      </td>
+      <td class="show"><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-stats", :title => "Получить код для вставки"), site %></td>
       <td><%= '%.2f' % site.rating %></td>
       <td class="share"></td>
     </tr>

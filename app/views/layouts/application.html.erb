@@ -3,11 +3,14 @@
 <head>
   <title>Рейтинг сайтов НОД</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <%= stylesheet_link_tag "http://yandex.st/bootstrap/3.0.3/css/bootstrap.min.css" %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag "http://yandex.st/bootstrap/3.0.3/css/bootstrap.min.css" %>
   <style>
     #sharethis span
     {
@@ -23,8 +26,8 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="logo"><%= link_to_unless_current "Рейтинг сайтов НОД", root_path %></div>
+      <div class="col-md-8 col-md-offset-2 site-body">
+        <div class="logo"><span class="image"><%= image_tag asset_path("logo.gif"), :width => 80, :height => 80 %></span><%= link_to_unless_current "Рейтинг сайтов НОД", root_path %></div>
         <hr />
 
         <%= yield %>
