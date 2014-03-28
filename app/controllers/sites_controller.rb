@@ -87,7 +87,7 @@ class SitesController < ApplicationController
 
     rank = 1
     Site.order("rating desc").each do |site|
-      site.update_attribute(:rank, rank)
+      site.update_attributes!(:rank => rank)
       rank += 1
     end
 
