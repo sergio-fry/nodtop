@@ -81,6 +81,8 @@ class SitesController < ApplicationController
       Rails.logger.debug(response.body)
 
       data_hash = JSON.parse(response.body)
+
+      site.google_data = data_hash
       
       site.rating = (data_hash["analytics"]["week"]["longUrlClicks"].to_f / 100.0).round(2)
       site.checked_at = Time.now

@@ -3,6 +3,7 @@ require "uri"
 
 class Site < ActiveRecord::Base
   belongs_to :referral_code
+  serialize :google_data
 
   validates :domain, :presence => { :message => "Домен не может быть пустым" }, :format => { with: /\A[a-z\-\.0-9]+\z/i, :message => "Некорректный формат домена" }, :uniqueness => { :message => "Этот сайт уже есть в рейтинге" }
   #validates :referral_code, :presence => true
