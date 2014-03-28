@@ -7,7 +7,7 @@ class BannerGenerator
 
 
     watermark_text = Draw.new
-    watermark_text.annotate(image, 0,0,0,0, "#{count}-й") do
+    watermark_text.annotate(image, 0,0,2,0, "#{count}-й") do
       watermark_text.gravity = EastGravity
       self.pointsize = 13
       self.fill = "white"
