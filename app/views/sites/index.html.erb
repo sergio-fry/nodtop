@@ -18,7 +18,7 @@
         <span class="favicon">
           <img alt="" height="16" onError="this.onerror=null;$(this).replaceWith(&quot;&lt;span class=&#39;glyphicon glyphicon-new-window&#39;&gt;&lt;/span&gt;&quot;);" src="//<%= site.domain %>/favicon.ico" width="16" />
         </span>
-        <%= link_to (site.title.presence || site.domain), site.url %>
+        <%= link_to (site.title.presence || site.domain), site.url, :target => "_blank" %>
       </td>
       <td class="show"><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-stats", :title => "Получить код для вставки"), site %></td>
       <td><%= '%.2f' % site.rating %></td>
