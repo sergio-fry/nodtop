@@ -26,7 +26,7 @@ class Site < ActiveRecord::Base
 
   def update_banners
     bucket = AWS_STORE.directories.get ENV['S3_BUCKET_NAME']
-    bucket.files.create(:key => "banners/#{counter_id}/banner_1.gif", :body => open(File.join(Rails.root, "app/banners/banner_1.gif")), :public => true)
+    bucket.files.create(:key => "banners/#{counter_id}/banner_1.gif", :body => BannerGenerator.generate(rank || 999), :public => true)
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204091312) do
+ActiveRecord::Schema.define(version: 20140328133718) do
 
   create_table "referral_codes", force: true do |t|
     t.string   "code"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140204091312) do
     t.datetime "updated_at"
     t.datetime "checked_at"
     t.string   "counter_id"
+    t.integer  "rank"
   end
 
 end

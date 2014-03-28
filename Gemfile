@@ -52,3 +52,4 @@ group :development do
 end
 
 gem 'fog'
+gem 'rmagick'

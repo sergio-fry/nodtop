@@ -94,6 +94,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
+    rmagick (2.13.2)
     ruby-hmac (0.4.0)
     sass (3.2.14)
     sass-rails (4.0.1)
@@ -142,6 +143,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 4.0.1)
+  rmagick
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3

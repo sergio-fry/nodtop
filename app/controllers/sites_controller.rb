@@ -85,6 +85,12 @@ class SitesController < ApplicationController
       site.save
     end
 
+    rank = 1
+    Site.order("rating desc").each do |site|
+      site.update_attribute(:rank, rank)
+      rank += 1
+    end
+
     render :text => :OK
   end
 
