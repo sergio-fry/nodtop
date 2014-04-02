@@ -1,35 +1,45 @@
 
-<p>
-  <strong>Сайт:</strong>
-  <%= @site.title.presence || @site.domain %>
-</p>
+<h1><%= @site.title.presence || @site.domain %> <% if @site.title.present? %><small><%= @site.domain %></small><% end %></h1>
 
-<p>
-  <strong>Домен:</strong>
-  <%= @site.domain %>
-</p>
+
 
 <p>
   <strong>Рейтинг:</strong>
   <%= @site.rating %>
 </p>
 
+<p class="jumbotron">Для того, чтобы начался подсчет рейтинга, необходимо установить счетчик на каждой странице Вашего сайта.</p>
+
 <p>
-  <strong>Код для вставки (георгиевская лента + счетчик):</strong><br />
+  <strong>Код для вставки javascript (для блога):</strong><br />
+  <small>Рекомендуется</small><br />
 
   <textarea cols="80" rows=6>
-    <!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
-    <span id="nodtop_counter_container"></span>
-     <script>
-       window.nodtop_cnt = {
-         id: "<%= @site.counter_id %>",
-         container_id: "nodtop_counter_container",
-         type: 1 // 0 - невидимый, 1 - маленький баннер
-       }
-    </script>
-    <script src="//sergio-fry.github.io/nodtop-counter-site/counter/v1/cnt.js" defer="defer"></script>
-
+<!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
+<!-- Код для сайта <%= @site.domain %> -->
+<span id="nodtop_counter_container"></span>
+ <script>
+   window.nodtop_cnt = {
+     id: "<%= @site.counter_id %>",
+     container_id: "nodtop_counter_container",
+     type: 1
+   }
+</script>
+<script src="//sergio-fry.github.io/nodtop-counter-site/counter/v1/cnt.js" defer="defer"></script>
   </textarea>
+</p>
 
-  <br /><small>Примечание: этот код подходит только для сайта '<%= @site.domain %>'</small>
+<p>
+  <strong>Код для вставки html</strong><br />
+  <small>Подходит для ЖЖ и других хостингов, которые не поддерживают javascript</small><br />
+
+  <textarea cols="80" rows=6>
+<!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
+<!-- Код для сайта <%= @site.domain %> -->
+<img src="//goo.gl/<%= @site.counter_id %>" width="1px" height="1px" /><a href='//nodtop.russianpulse.ru#s=<%= @site.domain %>' target='_blank' title='Участник рейтинга сайтов НОД'><img src='//s3.amazonaws.com/nodtop-store/banners/<%= @site.counter_id %>/banner_1.gif' alt='Рейтинг сайтов НОД' width='82' height='15' /></a>
+  </textarea>
+</p>
+
+<p>Внешний вид:<br />
+<img src='//s3.amazonaws.com/nodtop-store/banners/<%= @site.counter_id %>/banner_1.gif' alt='Рейтинг сайтов НОД' width='82' height='15' />
 </p>

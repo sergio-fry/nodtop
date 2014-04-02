@@ -10,6 +10,7 @@ class Site < ActiveRecord::Base
   #validates :referral_code_id, :uniqueness => true
 
   before_create :set_counter_id
+  after_create :update_banners
 
   scope :popular, lambda { order("rating DESC") }
 
