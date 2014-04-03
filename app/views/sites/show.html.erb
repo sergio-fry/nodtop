@@ -10,10 +10,15 @@
 
 <p class="jumbotron">Для того, чтобы начался подсчет рейтинга, необходимо установить счетчик на каждой странице Вашего сайта.</p>
 
-<p>
-  <strong>Код для вставки javascript (для блога):</strong><br />
-  <small>Рекомендуется</small><br />
 
+<div class="bs-example bs-example-tabs">
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#js_code" data-toggle="tab">Javascript (рекомендуется)</a></li>
+    <li><a href="#html_code" data-toggle="tab">Html (для ЖЖ)</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="js_code">
+<p>
   <textarea cols="80" rows=6>
 <!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
 <!-- Код для сайта <%= @site.domain %> -->
@@ -28,17 +33,19 @@
 <script src="//sergio-fry.github.io/nodtop-counter-site/counter/v1/cnt.js" defer="defer"></script>
   </textarea>
 </p>
-
-<p>
-  <strong>Код для вставки html</strong><br />
-  <small>Подходит для ЖЖ и других хостингов, которые не поддерживают javascript</small><br />
-
+    </div>
+    <div class="tab-pane fade" id="html_code">
+      <p>
   <textarea cols="80" rows=6>
 <!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
 <!-- Код для сайта <%= @site.domain %> -->
 <img src="//goo.gl/<%= @site.counter_id %>" width="1px" height="1px" /><a href='//nodtop.russianpulse.ru#s=<%= @site.domain %>' target='_blank' title='Участник рейтинга сайтов НОД'><img src='//s3.amazonaws.com/nodtop-store/banners/<%= @site.counter_id %>/banner_1.gif' alt='Рейтинг сайтов НОД' width='82' height='15' /></a>
   </textarea>
 </p>
+    </div>
+  </div>
+</div>
+
 
 <p>Внешний вид:<br />
 <img src='//s3.amazonaws.com/nodtop-store/banners/<%= @site.counter_id %>/banner_1.gif' alt='Рейтинг сайтов НОД' width='82' height='15' />
