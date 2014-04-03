@@ -12,7 +12,8 @@ class Site < ActiveRecord::Base
   before_create :set_counter_id
   after_create :update_banners
 
-  scope :popular, lambda { order("rating DESC") }
+  scope :popular, lambda { where("rating > 0").order("rating DESC") }
+  scope :zero_rating, lambda { where("rating = 0") }
 
   def referral=(code)
     self.referral_code = ReferralCode.find_by(code: code)

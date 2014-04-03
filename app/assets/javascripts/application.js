@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require sites
 
+$(function() {
+  $("a.toggle").click(function() {
+    $($(this).attr("href")).toggle();
+
+    return false;
+  });
+});
