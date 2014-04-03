@@ -16,7 +16,7 @@
 
 $(function() {
   $("a.toggle").click(function() {
-    $($(this).attr("href")).toggle();
+    $($(this).attr("href")).toggle().toggleClass("hidden");
 
     return false;
   });
