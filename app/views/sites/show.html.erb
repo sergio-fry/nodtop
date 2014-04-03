@@ -10,51 +10,46 @@
   <%= @site.rating %>
 </p>
 
-
 <% if @site.rating <= 0 %>
   <p class="well"><strong>Внимание!</strong> Для того, чтобы начался подсчет рейтинга, необходимо установить счетчик на каждой странице Вашего сайта.</p>
 <% end %>
 
+<h2>Выберите вид счетчика счетчика</h2>
+<%= form_tag(url_for(:action => :counter_code), { :method => :get }) do %>
 
-<div class="bs-example bs-example-tabs">
-  <ul id="myTab" class="nav nav-tabs">
-    <li class="active"><a href="#js_code" data-toggle="tab">Javascript (рекомендуется)</a></li>
-    <li><a href="#html_code" data-toggle="tab">Html (для ЖЖ)</a></li>
-  </ul>
-  <div id="myTabContent" class="tab-content">
-    <div class="tab-pane fade in active" id="js_code">
-<p>
-  <textarea style="width: 100%" rows=6>
-<!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
-<!-- Код для сайта <%= @site.domain %> -->
-<span id="nodtop_counter_container"></span>
- <script>
-   window.nodtop_cnt = {
-     id: "<%= @site.counter_id %>",
-     container_id: "nodtop_counter_container",
-     type: 1
-   }
-</script>
-<script src="//sergio-fry.github.io/nodtop-counter-site/counter/v1/cnt.js" defer="defer"></script>
-  </textarea>
-</p>
+  <div class="row">
+    <div class="col-md-4">
+      <%= radio_button_tag :type, 1, true %>
+      <%= label_tag :type_1 do %>
+        <%= image_tag(image_path("banners/examples/banner_1.gif")) %> (рекомендуется)
+      <% end %>
     </div>
-    <div class="tab-pane fade" id="html_code">
-      <p>
-  <textarea  style="width: 100%" rows=6>
-<!-- Участник рейтинга сайтов НОД http://nodtop.russianpulse.ru/ -->
-<!-- Код для сайта <%= @site.domain %> -->
-<img src="//goo.gl/<%= @site.counter_id %>" width="1px" height="1px" /><a href='//nodtop.russianpulse.ru#s=<%= @site.domain %>' target='_blank' title='Участник рейтинга сайтов НОД'><img src='//s3.amazonaws.com/nodtop-store/banners/<%= @site.counter_id %>/banner_1.gif' alt='Рейтинг сайтов НОД' width='82' height='15' /></a>
-  </textarea>
-</p>
+    <div class="col-md-4">
+      <%= radio_button_tag :type, 2 %>
+      <%= label_tag :type_2 do %>
+        <%= image_tag image_path("banners/examples/banner_2.gif") %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <%= radio_button_tag :type, 3 %>
+      <%= label_tag :type_3 do %>
+        <%= image_tag image_path("banners/examples/banner_3.gif") %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <%= radio_button_tag :type, 4 %>
+      <%= label_tag :type_4 do %>
+        <%= image_tag image_path("banners/examples/banner_4.gif") %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <%= radio_button_tag :type, 0 %> <%= label_tag :type_0, "Невидимый" %> <br />
     </div>
   </div>
-</div>
-
-
-<p>Внешний вид:<br />
-<img src='//s3.amazonaws.com/nodtop-store/banners/<%= @site.counter_id %>/banner_1.gif' alt='Рейтинг сайтов НОД' width='82' height='15' />
-</p>
+  <br />
+  <br />
+  <%= submit_tag "Получить код", :class => "btn btn-primary" %>
+<% end %>
 
 <br />
 <hr />

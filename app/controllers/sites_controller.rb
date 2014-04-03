@@ -2,7 +2,7 @@ require "net/http"
 require "uri"
 
 class SitesController < ApplicationController
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :counter_code]
   skip_before_action :verify_authenticity_token, :only => [:check_all, :update_banners]
 
   # GET /sites
@@ -70,6 +70,10 @@ class SitesController < ApplicationController
       format.html { redirect_to sites_url }
       format.json { head :no_content }
     end
+  end
+
+  def counter_code
+
   end
 
   def check_all

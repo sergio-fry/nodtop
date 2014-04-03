@@ -5,6 +5,7 @@ Nodtop::Application.routes.draw do
   get "about" => "pages#about"
 
   resources :sites, :only => [:index, :create, :new, :show]
+  get "sites/:id/counter_code" => "sites#counter_code"
 
   scope path: "/api/3gf98befdh23fn98qwefg72gn9" do
     resources :referral_codes do
