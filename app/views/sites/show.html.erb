@@ -1,6 +1,9 @@
 
 <h1><%= @site.title.presence || @site.domain %></h1>
-<% if @site.title.present? %><small><%= @site.domain %></small><% end %>
+<p>
+  <strong>Домен:</strong>
+  <%= @site.domain %>
+</p>
 
 <p>
   <strong>Рейтинг:</strong>
