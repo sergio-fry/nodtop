@@ -18,7 +18,7 @@ Nodtop::Application.routes.draw do
       collection do
         post "update_rating"
         post "update_rank"
-        post "update_banners"
+        post "run_delayed_jobs"
       end
     end
   end

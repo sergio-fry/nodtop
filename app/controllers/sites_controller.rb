@@ -3,7 +3,7 @@ require "uri"
 
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy, :counter_code]
-  skip_before_action :verify_authenticity_token, :only => [:update_rating, :update_rank, :update_banners]
+  skip_before_action :verify_authenticity_token, :only => [:update_rating, :update_rank, :run_delayed_jobs]
 
   # GET /sites
   # GET /sites.json
