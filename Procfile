@@ -1,1 +1,1 @@
-web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+web: bundle exec rake db:migrate && bundle exec unicorn -p $PORT -c ./config/unicorn.rb
