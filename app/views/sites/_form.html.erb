@@ -1,4 +1,4 @@
-<%= form_for(@site, :html => {}) do |f| %>
+<%= form_for(@site, :html => { :id => :new_site_form }) do |f| %>
 
   <% if @site.errors.any? %>
     <div id="error_explanation">
@@ -24,10 +24,17 @@
     <%= f.text_field :title, :class => "form-control" %>
   </div>
   <div class="field form-group">
-    <%= f.label :domain, "Домен (без http://) *" %><br>
+    <%= f.label :domain, "Домен*" %><br>
     <%= f.text_field :domain, :class => "form-control" %>
+    <small> (например rusnod.ru или nstarikov.ru) </small>
   </div>
+
+  <div class="field form-group">
+    <%= check_box_tag :i_love_russia %> <%= label_tag :i_love_russia, "Я хочу, чтобы Россия была сильной и независимой страной" %><br />
+    <%= check_box_tag :i_love_nod %> <%= label_tag :i_love_nod, "Я поддерживаю НОД" %><br />
+  </div>
+
   <div class="actions">
-    <%= f.submit "Добавить", :class => "btn btn-primary" %>
+    <%= f.submit "Зарегистрировать сайт!", :class => "btn btn-primary" %>
   </div>
 <% end %>
