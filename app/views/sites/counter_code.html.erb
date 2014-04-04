@@ -1,12 +1,21 @@
 <h1>Установка кода счетчика</h1>
-<div class="breadcrumbs">
-  <%= link_to @site.title || @site.domain, site_path(@site) %>
-  <%= link_to "Выбор внешнего вида", site_path(@site) %>
-  / получение кода
-</div>
+<ol class="breadcrumb">
+  <li><%= link_to @site.title || @site.domain, site_path(@site) %></li>
+  <li><%= link_to "Выбор внешнего вида счетчика", site_path(@site) %></li>
+  <li class="active">получение кода</li>
+</ol>
 
-Счетчик: 
-<%= image_tag image_path("banners/examples/banner_#{params[:type]}.gif") %>
+
+Счетчик будет выглядеть так: <br /> 
+<br />
+<% if params[:type].to_i == 0 %>
+  (пусто)
+<% else %>
+  <%= image_tag image_path("banners/examples/banner_#{params[:type]}.gif") %>
+<% end %>
+<br />
+<br />
+<br />
 
 <div class="bs-example bs-example-tabs">
   <ul id="myTab" class="nav nav-tabs">
@@ -47,6 +56,7 @@
     </div>
   </div>
 </div>
+<p class="help-block">Вставьте этот код в HTML текст вашего сайта там, где хотите, чтобы отображался счетчик</p>
 
 <br />
 <br />
