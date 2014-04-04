@@ -11,46 +11,68 @@
 </p>
 
 <% if @site.rating <= 0 %>
-  <p class="well"><strong>Внимание!</strong> Для того, чтобы начался подсчет рейтинга, необходимо установить счетчик на каждой странице Вашего сайта.</p>
+  <div class="alert alert-warning">
+    Пока у сайта нет показов. Такое может быть по нескольким причинам:
+    <ol>
+      <li>Вы не установили счетчик на сайт</li>
+      <li>Счетчик был установлен неправильно</li>
+      <li>На ваш никто не заходил целую неделю (мы в это не верим)</li>
+    </ol>
+  </div>
 <% end %>
 
-<h2>Выберите вид счетчика счетчика</h2>
-<%= form_tag(url_for(:action => :counter_code), { :method => :get }) do %>
+<div class="panel-group" id="accordion-banners">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion-banners" href="#collapseBanners">
+          Установка счетчика
+        </a>
+      </h4>
+    </div>
+    <div id="collapseBanners" class="panel-collapse <%= @site.rating > 0 ? "collapse" : "" %>">
+      <div class="panel-body">
 
-  <div class="row">
-    <div class="col-md-4">
-      <%= radio_button_tag :type, 1, true %>
-      <%= label_tag :type_1 do %>
-        <%= image_tag(image_path("banners/examples/banner_1.gif")) %>
+        <%= form_tag(url_for(:action => :counter_code), { :method => :get }) do %>
+
+          <div class="row">
+          <div class="col-md-4">
+            <%= radio_button_tag :type, 1, true %>
+            <%= label_tag :type_1 do %>
+              <%= image_tag(image_path("banners/examples/banner_1.gif")) %>
+          <% end %>
+            (рекомендуется)
+          </div>
+          <div class="col-md-4">
+            <%= radio_button_tag :type, 2 %>
+            <%= label_tag :type_2 do %>
+              <%= image_tag image_path("banners/examples/banner_2.gif") %>
+          <% end %>
+          </div>
+          <div class="col-md-4">
+            <%= radio_button_tag :type, 3 %>
+            <%= label_tag :type_3 do %>
+              <%= image_tag image_path("banners/examples/banner_3.gif") %>
+          <% end %>
+          </div>
+          <div class="col-md-4">
+            <%= radio_button_tag :type, 4 %>
+            <%= label_tag :type_4 do %>
+              <%= image_tag image_path("banners/examples/banner_4.gif") %>
+          <% end %>
+          </div>
+          <div class="col-md-4">
+            <%= radio_button_tag :type, 0 %> <%= label_tag :type_0, "Невидимый" %> <br />
+          </div>
+        </div>
+        <br />
+        <br />
+        <%= submit_tag "Получить код", :class => "btn btn-primary" %>
       <% end %>
-      (рекомендуется)
-    </div>
-    <div class="col-md-4">
-      <%= radio_button_tag :type, 2 %>
-      <%= label_tag :type_2 do %>
-        <%= image_tag image_path("banners/examples/banner_2.gif") %>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <%= radio_button_tag :type, 3 %>
-      <%= label_tag :type_3 do %>
-        <%= image_tag image_path("banners/examples/banner_3.gif") %>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <%= radio_button_tag :type, 4 %>
-      <%= label_tag :type_4 do %>
-        <%= image_tag image_path("banners/examples/banner_4.gif") %>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <%= radio_button_tag :type, 0 %> <%= label_tag :type_0, "Невидимый" %> <br />
+      </div>
     </div>
   </div>
-  <br />
-  <br />
-  <%= submit_tag "Получить код", :class => "btn btn-primary" %>
-<% end %>
+</div>
 
 <br />
 <br />
