@@ -134,6 +134,10 @@ class SitesController < ApplicationController
     Metric.add_data_point("Sites.count", Time.now, Site.where("rating > 0").count)
     Metric.add_data_point("Sites.rating_sum", Time.now, Site.sum(:rating))
 
+    Site.order("rating desc").each do |site|
+      site.update_metrics
+    end
+
     render :text => "OK"
   rescue Exception => $e
     render :text => "Error: #{$e}"

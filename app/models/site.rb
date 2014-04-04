@@ -33,6 +33,11 @@ class Site < ActiveRecord::Base
     bucket.files.create(:key => "banners/#{counter_id}/banner_2.gif", :body => BannerGenerator.generate(rank || (Site.maximum(:rank) + 1), BannerGenerator::TYPE_ORANGE), :public => true)
   end
 
+  def update_metrics
+    Metric.add_data_point("Site:#{id}:rating", Time.now, rating || 0)
+    Metric.add_data_point("Site:#{id}:rank", Time.now, rank || (Site.maximum(:rank) || 0) + 1)
+  end
+
   def update_rating
     uri = URI.parse("https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/#{counter_id}&projection=FULL")
 
