@@ -51,6 +51,10 @@ group :development do
   gem 'zeus'
 end
 
+group :production do
+  gem 'unicorn'
+end
+
 gem 'fog'
 gem 'rmagick'
 gem 'delayed_job_active_record'

@@ -88,8 +88,15 @@ class SitesController < ApplicationController
 
   def update_rank
     rank = 1
+
     Site.order("rating desc").each do |site|
-      site.update_attributes!(:rank => rank)
+      site.rank = rank
+
+      if site.rank_changed?
+        site.delay(:priority => 5).update_banners
+        site.save
+      end
+
       rank += 1
     end
 
@@ -98,9 +105,14 @@ class SitesController < ApplicationController
     render :text => "Error: #{$e}"
   end
 
-  def update_banners
-    Site.order("rating desc").each do |site|
-      site.delay(:priority => 5).update_banners
+  def run_delayed_jobs
+    t = Time.now
+
+    loop do
+      break if t < 20.seconds.ago
+      results = Delayed::Worker.new.work_off(1) rescue nil
+
+      break if results.sum == 0
     end
 
     render :text => :OK
