@@ -3,7 +3,7 @@ require "uri"
 
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy, :counter_code]
-  skip_before_action :verify_authenticity_token, :only => [:update_rating, :update_rank, :update_banners, :run_delayed_jobs]
+  skip_before_action :verify_authenticity_token, :only => [:update_rating, :update_rank, :update_banners, :run_delayed_jobs, :update_metrics]
 
   # GET /sites
   # GET /sites.json
@@ -126,6 +126,15 @@ class SitesController < ApplicationController
     end
 
     render :text => "OK. Jobs left: #{Delayed::Job.count}"
+  rescue Exception => $e
+    render :text => "Error: #{$e}"
+  end
+
+  def update_metrics
+    Metric.add_data_point("Sites.count", Time.now, Site.where("rating > 0").count)
+    Metric.add_data_point("Sites.rating_sum", Time.now, Site.sum(:rating))
+
+    render :text => "OK"
   rescue Exception => $e
     render :text => "Error: #{$e}"
   end

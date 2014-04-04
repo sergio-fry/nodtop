@@ -20,6 +20,7 @@ Nodtop::Application.routes.draw do
         post "update_banners"
         post "update_rank"
         post "update_rating"
+        post "update_metrics"
       end
     end
   end
