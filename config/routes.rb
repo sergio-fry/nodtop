@@ -16,7 +16,8 @@ Nodtop::Application.routes.draw do
 
     resources :sites do
       collection do
-        post "check_all"
+        post "update_rating"
+        post "update_rank"
         post "update_banners"
       end
     end

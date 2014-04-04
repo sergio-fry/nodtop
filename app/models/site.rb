@@ -10,7 +10,7 @@ class Site < ActiveRecord::Base
   #validates :referral_code_id, :uniqueness => true
 
   before_create :set_counter_id
-  after_create :update_banners
+  after_create lambda { delay.update_rating }
 
   scope :popular, lambda { where("rating > 0").order("rating DESC") }
   scope :zero_rating, lambda { where("rating = 0") }
@@ -31,6 +31,20 @@ class Site < ActiveRecord::Base
     bucket = AWS_STORE.directories.get ENV['S3_BUCKET_NAME']
     bucket.files.create(:key => "banners/#{counter_id}/banner_1.gif", :body => BannerGenerator.generate(rank || (Site.maximum(:rank) + 1), BannerGenerator::TYPE_BLACK), :public => true)
     bucket.files.create(:key => "banners/#{counter_id}/banner_2.gif", :body => BannerGenerator.generate(rank || (Site.maximum(:rank) + 1), BannerGenerator::TYPE_ORANGE), :public => true)
+  end
+
+  def update_rating
+    uri = URI.parse("https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/#{counter_id}&projection=FULL")
+
+    response = Net::HTTP.get_response(uri)
+    data_hash = JSON.parse(response.body)
+
+    self.google_data = data_hash
+
+    self.rating = (data_hash["analytics"]["week"]["longUrlClicks"].to_f / 100.0).round(2)
+    self.checked_at = Time.now
+
+    save!
   end
 
   private

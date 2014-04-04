@@ -53,3 +53,4 @@ end
 
 gem 'fog'
 gem 'rmagick'
+gem 'delayed_job_active_record'

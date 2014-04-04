@@ -3,7 +3,7 @@ require "uri"
 
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy, :counter_code]
-  skip_before_action :verify_authenticity_token, :only => [:check_all, :update_banners]
+  skip_before_action :verify_authenticity_token, :only => [:update_rating, :update_rank, :update_banners]
 
   # GET /sites
   # GET /sites.json
@@ -76,24 +76,17 @@ class SitesController < ApplicationController
 
   end
 
-  def check_all
-    Site.where("checked_at IS NULL OR checked_at < ?", 1.hour.ago).each do |site|
-      uri = URI.parse("https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/#{site.counter_id}&projection=FULL")
-
-      response = Net::HTTP.get_response(uri)
-
-      Rails.logger.debug(response.body)
-
-      data_hash = JSON.parse(response.body)
-
-      site.google_data = data_hash
-      
-      site.rating = (data_hash["analytics"]["week"]["longUrlClicks"].to_f / 100.0).round(2)
-      site.checked_at = Time.now
-
-      site.save
+  def update_rating
+    Site.order("rating desc").each do |site|
+      site.delay(:priority => 5).update_rating
     end
 
+    render :text => :OK
+  rescue Exception => $e
+    render :text => "Error: #{$e}"
+  end
+
+  def update_rank
     rank = 1
     Site.order("rating desc").each do |site|
       site.update_attributes!(:rank => rank)
@@ -101,18 +94,18 @@ class SitesController < ApplicationController
     end
 
     render :text => :OK
+  rescue Exception => $e
+    render :text => "Error: #{$e}"
   end
 
   def update_banners
-    begin
-      Site.all.each do |site|
-        site.update_banners
-      end
-
-      render :text => :OK
-    rescue Exception => $e
-      render :text => "Error: #{$e}"
+    Site.order("rating desc").each do |site|
+      site.delay(:priority => 5).update_banners
     end
+
+    render :text => :OK
+  rescue Exception => $e
+    render :text => "Error: #{$e}"
   end
 
   private
