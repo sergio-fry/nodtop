@@ -115,7 +115,7 @@ class SitesController < ApplicationController
       break if results.sum == 0
     end
 
-    render :text => :OK
+    render :text => "OK. Jobs left: #{Delayed::Job.count}"
   rescue Exception => $e
     render :text => "Error: #{$e}"
   end
