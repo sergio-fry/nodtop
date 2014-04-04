@@ -3,7 +3,7 @@ class BannerGenerator
   include Magick
 
   TYPE_BLACK = 1
-  TYPE_ORANGE = 1
+  TYPE_ORANGE = 2
 
   TYPE_TEXT_COLOR = {
     TYPE_BLACK => "#ed7500",
