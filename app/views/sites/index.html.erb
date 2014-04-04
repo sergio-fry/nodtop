@@ -13,9 +13,10 @@
 
   <tbody>
   <% @sites.popular.each_with_index do |site, index| %>
-    <tr class="site" data-rating="<%= site.rating %>">
+    <tr class="site" data-rating="<%= site.rating %>" data-domain="<%= site.domain %>">
       <td class="rank"><%= index + 1 %></td>
       <td class="title">
+        <%= content_tag :a, nil, :name => site.domain %>
 
         <span class="favicon">
           <img alt="" height="16" onError="this.onerror=null;$(this).replaceWith(&quot;&lt;span class=&#39;glyphicon glyphicon-new-window&#39;&gt;&lt;/span&gt;&quot;);" src="//<%= site.domain %>/favicon.ico" width="16" />

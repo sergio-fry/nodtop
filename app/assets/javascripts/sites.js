@@ -8,6 +8,15 @@ $(function() {
       var share = parseFloat($(this).data("rating")) / rating_total;
       $(this).find(".share").html(Math.round(share * 10000) / 100 + "&nbsp;%");
     });
+
+
+    // если переход с сайта, то подсвечиваем его
+    var match = window.location.href.match(/#(.*)/);
+    if(match) {
+      var site = table.find(".site[data-domain='"+match[1]+"']");
+      site.css({ background: "orange" });
+
+    }
   });
 
   $("#new_site_form").each(function() {
@@ -29,4 +38,6 @@ $(function() {
       update_submit();
     });
   });
+
+
 });
