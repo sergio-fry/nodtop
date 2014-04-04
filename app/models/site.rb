@@ -23,6 +23,17 @@ class Site < ActiveRecord::Base
     referral_code.try(:code)
   end
 
+  # доля в общем рейтинге
+  def share
+    sum = Site.sum(:rating) || 0
+
+    if sum == 0
+      0
+    else
+      rating.to_f / sum.to_f
+    end
+  end
+
   def url
     "http://#{domain}"
   end
@@ -36,6 +47,8 @@ class Site < ActiveRecord::Base
   def update_metrics
     Metric.add_data_point("Site:#{id}:rating", Time.now, rating || 0)
     Metric.add_data_point("Site:#{id}:rank", Time.now, rank || (Site.maximum(:rank) || 0) + 1)
+
+    Metric.add_data_point("Site:#{id}:share", Time.now, share)
   end
 
   def update_rating
