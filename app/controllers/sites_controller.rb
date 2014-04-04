@@ -3,7 +3,7 @@ require "uri"
 
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy, :counter_code]
-  skip_before_action :verify_authenticity_token, :only => [:update_rating, :update_rank, :run_delayed_jobs]
+  skip_before_action :verify_authenticity_token, :only => [:update_rating, :update_rank, :update_banners, :run_delayed_jobs]
 
   # GET /sites
   # GET /sites.json
@@ -74,6 +74,16 @@ class SitesController < ApplicationController
 
   def counter_code
 
+  end
+
+  def update_banners
+    Site.order("rating desc").each do |site|
+      site.delay(:priority => 5).update_banners
+    end
+
+    render :text => :OK
+  rescue Exception => $e
+    render :text => "Error: #{$e}"
   end
 
   def update_rating
