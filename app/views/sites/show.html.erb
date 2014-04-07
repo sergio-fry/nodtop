@@ -6,12 +6,20 @@
 </p>
 
 <p>
-  <strong>Рейтинг:</strong>
-  <%= @site.rating %>
-</p>
-
-<p>
-  <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rating"), "Рейтинг #{@site.domain}") %>
+  <div class="bs-example bs-example-tabs">
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"><a href="#tab_rating" data-toggle="tab">Рейтинг: <%= @site.rating %></a></li>
+      <li><a href="#tab_rank" data-toggle="tab">Позиция в рейтинге: <%= @site.rank %></a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade in active" id="tab_rating">
+        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rating"), "Рейтинг #{@site.domain}") %>
+      </div>
+      <div class="tab-pane fade in" id="tab_rank">
+        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rank"), "Позицияв рейтинге #{@site.domain}") %>
+      </div>
+    </div>
+  </div>
 </p>
 
 <% if @site.rating <= 0 %>
