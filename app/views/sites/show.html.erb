@@ -10,6 +10,10 @@
   <%= @site.rating %>
 </p>
 
+<p>
+  <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rating"), "Рейтинг #{@site.domain}") %>
+</p>
+
 <% if @site.rating <= 0 %>
   <div class="alert alert-warning">
     Пока у сайта нет показов. Такое может быть по нескольким причинам:

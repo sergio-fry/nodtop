@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require dygraph-combined
 //= require jquery_ujs
 //= require sites
 
