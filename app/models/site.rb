@@ -10,7 +10,7 @@ class Site < ActiveRecord::Base
   #validates :referral_code_id, :uniqueness => true
 
   before_create :set_counter_id
-  after_create lambda { delay.update_rating }
+  after_create lambda { delay.update_rating; delay.update_banners }
 
   scope :popular, lambda { where("rating > 0").order("rating DESC") }
   scope :zero_rating, lambda { where("rating = 0") }
