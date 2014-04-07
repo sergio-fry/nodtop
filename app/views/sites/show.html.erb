@@ -10,6 +10,7 @@
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#tab_rating" data-toggle="tab">Рейтинг: <%= @site.rating %></a></li>
       <li><a href="#tab_rank" data-toggle="tab">Позиция в рейтинге: <%= @site.rank %></a></li>
+      <li><a href="#tab_share" data-toggle="tab"><%= (@site.share * 100).round(2) %>% НОД</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active" id="tab_rating">
@@ -17,6 +18,9 @@
       </div>
       <div class="tab-pane" id="tab_rank">
         <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rank"), "Позиция в рейтинге #{@site.domain}") %>
+      </div>
+      <div class="tab-pane" id="tab_share">
+        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:share"), "Доля в НОД #{@site.domain}") %>
       </div>
     </div>
   </div>
