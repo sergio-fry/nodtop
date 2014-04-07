@@ -12,15 +12,30 @@
       <li><a href="#tab_rank" data-toggle="tab">Позиция в рейтинге: <%= @site.rank %></a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
-      <div class="tab-pane fade in active" id="tab_rating">
+      <div class="tab-pane active" id="tab_rating">
         <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rating"), "Рейтинг #{@site.domain}") %>
       </div>
-      <div class="tab-pane fade in" id="tab_rank">
-        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rank"), "Позицияв рейтинге #{@site.domain}") %>
+      <div class="tab-pane" id="tab_rank">
+        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rank"), "Позиция в рейтинге #{@site.domain}") %>
       </div>
     </div>
   </div>
 </p>
+
+<%= javascript_tag do %>
+  $('#myTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+
+    var tab = $(this);
+    setTimeout(function() {
+      $($(tab).attr("href")).find(".dygraph_container").data("dygraph").resize();
+    }, 50 );
+
+  })
+<% end %>
+
+<br />
 
 <% if @site.rating <= 0 %>
   <div class="alert alert-warning">
