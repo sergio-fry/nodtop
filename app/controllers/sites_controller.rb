@@ -100,11 +100,9 @@ class SitesController < ApplicationController
     rank = 1
 
     Site.order("rating desc").each do |site|
-      site.rank = rank
-
-      if site.rank_changed?
+      if rank != site.rank
+        site.update_attribute(:rank, rank)
         site.delay(:priority => 5).update_banners
-        site.save
       end
 
       rank += 1
