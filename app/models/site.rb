@@ -45,10 +45,10 @@ class Site < ActiveRecord::Base
   end
 
   def update_metrics
-    Metric.add_data_point("Site:#{id}:rating", Time.now, rating || 0)
-    Metric.add_data_point("Site:#{id}:rank", Time.now, rank || (Site.maximum(:rank) || 0) + 1)
+    SimpleMetric::Metric.add_data_point("Site:#{id}:rating", Time.now, rating || 0)
+    SimpleMetric::Metric.add_data_point("Site:#{id}:rank", Time.now, rank || (Site.maximum(:rank) || 0) + 1)
 
-    Metric.add_data_point("Site:#{id}:share", Time.now, share)
+    SimpleMetric::Metric.add_data_point("Site:#{id}:share", Time.now, share)
   end
 
   def update_rating

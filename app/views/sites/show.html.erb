@@ -14,13 +14,13 @@
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active" id="tab_rating">
-        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rating"), "Рейтинг #{@site.domain}") %>
+        <%= simple_metric_graph(["Site:#{@site.id}:rating", "Рейтинг #{@site.domain}"]) %>
       </div>
       <div class="tab-pane" id="tab_rank">
-        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:rank"), "Позиция в рейтинге #{@site.domain}") %>
+        <%= simple_metric_graph(["Site:#{@site.id}:rank", "Позиция в рейтинге #{@site.domain}"]) %>
       </div>
       <div class="tab-pane" id="tab_share">
-        <%= metric_graph(Metric.find_by(:key => "Site:#{@site.id}:share"), "Доля в НОД #{@site.domain}") %>
+        <%= simple_metric_graph(["Site:#{@site.id}:share", "Доля в НОД #{@site.domain}"]) %>
       </div>
     </div>
   </div>

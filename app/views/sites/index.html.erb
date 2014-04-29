@@ -1,6 +1,6 @@
 <center><strong>Общий рейтинг сайтов</strong></center>
 <br />
-<%= metric_graph(Metric.find_by(:key => "Sites.rating_sum"), "Общий рейтинг НОД") %>
+<%= simple_metric_graph(["Sites.rating_sum", "Общий рейтинг НОД"]) %>
 <br />
 <br />
 <br />
