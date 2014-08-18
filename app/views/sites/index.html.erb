@@ -1,82 +1,87 @@
 <center><strong>Общий рейтинг сайтов</strong></center>
 <br />
-<%= simple_metric_graph(["Sites.rating_sum", "Общий рейтинг НОД"]) %>
+<%= cache :metrics, :expires_in => 12.hours do %>
+  <%= simple_metric_graph(["Sites.rating_sum", "Общий рейтинг НОД"]) %>
+<% end %>
 <br />
 <br />
 <br />
 
 
-<table class="table sites-table">
-  <thead>
-    <tr>
-      <th></th>
-      <th width="100%">Сайт</th>
-      <th></th>
-      <th>Рейтинг</th>
-      <th>%&nbsp;НОД</th>
-    </tr>
-  </thead>
+<% cache :sites, :expires_in => 12.hours do %>
 
-  <tbody>
-  <% @sites.popular.each_with_index do |site, index| %>
-    <tr class="site" data-rating="<%= site.rating %>" data-domain="<%= site.domain %>">
-      <td class="rank"><%= index + 1 %></td>
-      <td class="title">
-        <%= content_tag :a, nil, :name => site.domain %>
+  <table class="table sites-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th width="100%">Сайт</th>
+        <th></th>
+        <th>Рейтинг</th>
+        <th>%&nbsp;НОД</th>
+      </tr>
+    </thead>
 
-        <span class="favicon">
-          <img alt="" height="16" onError="this.onerror=null;$(this).replaceWith(&quot;&lt;span class=&#39;glyphicon glyphicon-new-window&#39;&gt;&lt;/span&gt;&quot;);" src="//<%= site.domain %>/favicon.ico" width="16" />
-        </span>
-        <%= link_to (site.title.presence || site.domain), site.url, :target => "_blank" %>
-      </td>
-      <td class="show"><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-stats", :title => "Получить код для вставки"), site %></td>
-      <td><%= '%.2f' % site.rating %></td>
-      <td class="share"></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<hr />
+    <tbody>
+    <% @sites.popular.each_with_index do |site, index| %>
+      <tr class="site" data-rating="<%= site.rating %>" data-domain="<%= site.domain %>">
+        <td class="rank"><%= index + 1 %></td>
+        <td class="title">
+          <%= content_tag :a, nil, :name => site.domain %>
+
+          <span class="favicon">
+            <img alt="" height="16" onError="this.onerror=null;$(this).replaceWith(&quot;&lt;span class=&#39;glyphicon glyphicon-new-window&#39;&gt;&lt;/span&gt;&quot;);" src="//<%= site.domain %>/favicon.ico" width="16" />
+          </span>
+          <%= link_to (site.title.presence || site.domain), site.url, :target => "_blank" %>
+        </td>
+        <td class="show"><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-stats", :title => "Получить код для вставки"), site %></td>
+        <td><%= '%.2f' % site.rating %></td>
+        <td class="share"></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <hr />
 
 
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          Остальные сайты
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse">
-      <div class="panel-body">
-        <p>Сайты, владельцы которых пока не установили код счетчика.<br /><em><strong>Внимание!</strong> Существует задержка в несколько часов</em></p>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Остальные сайты
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p>Сайты, владельцы которых пока не установили код счетчика.<br /><em><strong>Внимание!</strong> Существует задержка в несколько часов</em></p>
 
-        <table class="table table-striped table-hover sites-table">
-          <thead>
-            <tr>
-              <th width="100%">Сайт</th>
-              <th></th>
-              <th>Рейтинг</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @sites.zero_rating.each_with_index do |site, index| %>
-              <tr class="site" data-rating="<%= site.rating %>">
-                <td class="title">
-                  <span class="favicon">
-                    <img alt="" height="16" onError="this.onerror=null;$(this).replaceWith(&quot;&lt;span class=&#39;glyphicon glyphicon-new-window&#39;&gt;&lt;/span&gt;&quot;);" src="//<%= site.domain %>/favicon.ico" width="16" />
-                  </span>
-                  <%= link_to (site.title.presence || site.domain), site.url, :target => "_blank" %>
-                </td>
-                <td class="show"><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-stats", :title => "Получить код для вставки"), site %></td>
-                <td><%= '%.2f' % site.rating %></td>
+          <table class="table table-striped table-hover sites-table">
+            <thead>
+              <tr>
+                <th width="100%">Сайт</th>
+                <th></th>
+                <th>Рейтинг</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              <% @sites.zero_rating.each_with_index do |site, index| %>
+                <tr class="site" data-rating="<%= site.rating %>">
+                  <td class="title">
+                    <span class="favicon">
+                      <img alt="" height="16" onError="this.onerror=null;$(this).replaceWith(&quot;&lt;span class=&#39;glyphicon glyphicon-new-window&#39;&gt;&lt;/span&gt;&quot;);" src="//<%= site.domain %>/favicon.ico" width="16" />
+                    </span>
+                    <%= link_to (site.title.presence || site.domain), site.url, :target => "_blank" %>
+                  </td>
+                  <td class="show"><%= link_to content_tag(:span, nil, :class => "glyphicon glyphicon-stats", :title => "Получить код для вставки"), site %></td>
+                  <td><%= '%.2f' % site.rating %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
